@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <title>Quick and dirty decorator</title>
+        <style>
+            body {
+                margin: 16px;
+                border: 0;
+                box-sizing: border-box;
+                background-color: rgb(250, 250, 250);
+                color: rgb(30, 30, 30);
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+        <script>
+            var isBoldApplied = false;
+            var isItalicApplied = false;
+            var isUnderlineApplied = false;
+            var baseText = "Example text on which the formatting is applied.";
+
+            class Text {
+                constructor() {}
+            }
+
+            class PlainText extends Text {
+                constructor() {
+                    super();
+                }
+                getText() {
+                    return baseText;
+                }
+                decorated() {
+                    return this;
+                }
+            }
+
+            class BoldText extends Text {
+                constructor(decorated) {
+                    super();
+                    this.decorated = decorated;
+                }
+                getText() {
+                    return "<b>" + this.decorated.getText() + "</b>";
+                }
+                decorated() {
+                    return this.decorated;
+                }
+            }
+
+            class ItalicText extends Text {
+                constructor(decorated) {
+                    super();
+                    this.decorated = decorated;
+                }
+                getText() {
+                    return "<i>" + this.decorated.getText() + "</i>";
+                }
+                decorated() {
+                    return this.decorated;
+                }
+            }
+
+            class UnderlineText extends Text {
+                constructor(decorated) {
+                    super();
+                    this.decorated = decorated;
+                }
+                getText() {
+                    return "<u>" + this.decorated.getText() + "</u>";
+                }
+                decorated() {
+                    return this.decorated;
+                }
+            }
+
+            function render() {
+                let decorator = new PlainText();
+
+                if(isBoldApplied) decorator = new BoldText(decorator);
+                if(isItalicApplied) decorator = new ItalicText(decorator);
+                if(isUnderlineApplied) decorator = new UnderlineText(decorator);
+
+                document.getElementById("textview").innerHTML = decorator.getText();
+            }
+
+            window.onload = () => {
+
+                document.getElementById("bold").onclick = () => {
+                    isBoldApplied = !isBoldApplied;
+                    render();
+                }
+
+                document.getElementById("italic").onclick = () => {
+                    isItalicApplied = !isItalicApplied;
+                    render();
+                }
+
+                document.getElementById("underline").onclick = () => {
+                    isUnderlineApplied = !isUnderlineApplied;
+                    render();
+                }
+
+                render();
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <h1>Very simple decorator pattern implemented in js</h1>
+        <ul>
+            <li>
+                Text formatting isn't ideal use case of decorator pattern but this is serves fine for an example.
+            </li>
+            <li>
+                Classes:
+                <ul>
+                    <li>Base class: Text</li>
+                    <li>Base render class: PlainText, this just returns the text to be rendered as string.</li>
+                    <li>Decorator classes:
+                    <ul>
+                        <li>BoldText: Holds an instance of Text class, calls the getText() method on the decorated instance and decorates(adds) bold formatting to it.</li>
+                        <li>ItalicText: Holds an instance of Text class, calls the getText() method on the decorated instance and decorates(adds) italic formatting to it.</li>
+                        <li>UnderlineText: Holds an instance of Text class, calls the getText() method on the decorated instance and decorates(adds) underline formatting to it.</li>
+
+                   </ul> 
+                    </li>
+                </ul>
+            </li>            
+        </p>
+        
+
+        <button id = "bold"><b>Bold</b></button>
+        <button id = "italic"><i>Italic</i></button>
+        <button id = "underline"><u>Underline</u></button>
+
+        <p id="textview"></p>
+    </body>
+</html>
