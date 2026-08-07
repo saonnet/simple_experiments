@@ -1,6 +1,7 @@
 <html>
     <head>
         <script src="main.js"></script>
+        <link href="main.css" rel="stylesheet" />
         <title>Simple job application tracker</title>
     </head>
     <body>
@@ -24,7 +25,7 @@
 
             <label for="job-id">Job Id</label>
             <br />
-            <input type="text" id="job-d" name="job-id" />
+            <input type="text" id="job-id" name="job-id" />
             <br />
 
             <label for="job-description">Job Description</label>
@@ -34,19 +35,24 @@
 
             <input type="submit" id="submit" value="Save" />
 
-
             <datalist id="organisations">
             </datalist>
         </form>
 
-        <h2>Actions</h2>
-        <button id="export-data">Export Data</button>
-        <br />
 
-        <label for="import-data">Import data</label>
-        <br />
-        <input type="file" id="import-data" name="import-data" accept=".json" />
-        <br />
+<div class="actions">
+            <h2>Actions</h2>
+            
+    <button id="export-data">Export Data</button>
+
+    <div class="field">
+        <label for="import-data">Import Data</label>
+        <input type="file"
+               id="import-data"
+               name="import-data"
+               accept=".json">
+    </div>
+</div>
 
         <h2>Stats</h2>
         <ul id="stats-summary">
