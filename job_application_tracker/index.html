@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <script src="main.js"></script>
+        <title>Simple job application tracker</title>
+    </head>
+    <body>
+        <h1>Simple job application tracker</h1>
+        <p>Very simple tool to track job applications.</p>
+        <form id="main-form" autocomplete="on">
+            <label for="org-name">Organisation</label>
+            <br />
+            <input type="text" id="org-name" name="org-name" list="organisations" required />
+            <br />
+
+            <label for="is-referral">Referral</label>
+            <br />
+            <input type="checkbox" id="is-referral" name="is-referral" value="referral" />
+            <br />
+
+            <label for="application-date">Applied On</label>
+            <br />
+            <input type="date" id="application-date" name="application-date" />
+            <br />
+
+            <label for="job-id">Job Id</label>
+            <br />
+            <input type="text" id="job-d" name="job-id" />
+            <br />
+
+            <label for="job-description">Job Description</label>
+            <br />
+            <textarea id="job-description" name="job-description" placeholder="Paste job description here ..."></textarea>
+            <br />
+
+            <input type="submit" id="submit" value="Save" />
+
+
+            <datalist id="organisations">
+            </datalist>
+        </form>
+
+        <h2>Actions</h2>
+        <button id="export-data">Export Data</button>
+        <br />
+
+        <label for="import-data">Import data</label>
+        <br />
+        <input type="file" id="import-data" name="import-data" accept=".json" />
+        <br />
+
+        <h2>Stats</h2>
+        <ul id="stats-summary">
+        </ul>
+    </body>
+</html>
